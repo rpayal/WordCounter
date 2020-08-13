@@ -30,8 +30,15 @@ public class WordAppTest {
     }
 
     @Test
-    @DisplayName("adding words and then find count for a word.")
+    @DisplayName("return 0 for a non existing word on finding it's count.")
     @Order(2)
+    public void checkWordApp_count_wrong_word_scenario() {
+        assertEquals(0, wordApp.countWord("Hello"));
+    }
+
+    @Test
+    @DisplayName("adding words and then find count for a word.")
+    @Order(3)
     public void checkWordApp_ideal_scenario() throws NotAValidWordException {
         wordApp.addWord("flower");
         wordApp.addWord("flor");

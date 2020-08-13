@@ -3,7 +3,6 @@ import utils.Translator;
 import utils.Validator;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class WordApp {
     public static final String WORD_CAN_ONLY_CONTAIN_ALPHANUMERIC_CHARACTERS = "Word can only contain alphanumeric characters.";
@@ -28,10 +27,16 @@ public class WordApp {
 
     public int countWord(String countForWord) {
         Set<Map.Entry<String, List<String>>> entries = wordStore.entrySet();
-       return wordStore.entrySet().stream()
+        Optional<List<String>> mayFoundWord = wordStore.entrySet().stream()
                 .filter(e -> countForWord.equals(e.getKey()))
                 .map(Map.Entry::getValue)
-                .collect(Collectors.toList())
-                .get(0).size();
+                .findFirst();
+
+        if (mayFoundWord.isPresent()) {
+            return mayFoundWord.get().size();
+        } else {
+            return 0;
+            //throw new WordNotExistException("Word " + countForWord + " not exist.");
+        }
     }
 }
