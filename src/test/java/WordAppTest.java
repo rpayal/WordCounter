@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import utils.Translator;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("A test case for word app")
 public class WordAppTest {
@@ -28,5 +27,16 @@ public class WordAppTest {
         );
 
         assertTrue(thrown.getMessage().contains(wordApp.WORD_CAN_ONLY_CONTAIN_ALPHANUMERIC_CHARACTERS));
+    }
+
+    @Test
+    @DisplayName("adding words and then find count for a word.")
+    @Order(2)
+    public void checkWordApp_ideal_scenario() throws NotAValidWordException {
+        wordApp.addWord("flower");
+        wordApp.addWord("flor");
+        wordApp.addWord("blume");
+
+        assertEquals(3, wordApp.countWord("flower"));
     }
 }
