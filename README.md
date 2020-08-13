@@ -17,6 +17,8 @@ For the simplicity of the task assume that translation of words will be done via
 
 # Syntax; 
 ```
-java WordApp <word to found count, last word in list used for count> 
-java WordApp flor blume hello flower
+$ java -cp target/WordCounter-1.0-SNAPSHOT.jar WordApp <word to found count, last word in list used for count> 
+
+$ java -cp target/WordCounter-1.0-SNAPSHOT.jar WordApp flor blume hello flower
+- Count for word [flower] - 3
 ```
