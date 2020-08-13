@@ -39,4 +39,23 @@ public class WordApp {
             //throw new WordNotExistException("Word " + countForWord + " not exist.");
         }
     }
+
+    public static void main(String[] args) throws NotAValidWordException {
+        String countForWord;
+        if (args.length == 0) {
+            System.out.println("No arguments found. Use bellow syntax;");
+            System.out.println("java WordApp <list of words to add> <word to found count, last word in list used for count>");
+            System.out.println("java WordApp flower flor blume hello flower");
+            return;
+        } else {
+            countForWord = args[args.length - 1];
+        }
+
+        WordApp wordApp = new WordApp(new Translator());
+        for (String word : args) {
+            wordApp.addWord(word);
+        }
+        System.out.println("Count for word ["+countForWord+"] - " + wordApp.countWord(countForWord));
+        return;
+    }
 }
