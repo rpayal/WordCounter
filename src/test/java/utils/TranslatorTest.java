@@ -14,5 +14,9 @@ public class TranslatorTest {
     @DisplayName("test word translation")
     public void translate() {
         assertEquals("hello", translator.translate("hello"));
+        assertEquals("hello", translator.translate("holla"));
+
+        // word not in store
+        assertEquals("Park", translator.translate("Park"));
     }
 }
