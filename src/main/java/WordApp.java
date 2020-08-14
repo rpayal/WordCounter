@@ -15,14 +15,9 @@ public class WordApp {
     }
 
     public void addWord(String wordToAdd) throws NotAValidWordException {
-        if (! Validator.checkOnlyContainAlphanumeric(wordToAdd)) {
-            throw new NotAValidWordException(WORD_CAN_ONLY_CONTAIN_ALPHANUMERIC_CHARACTERS);
+        if (validateWord(wordToAdd)) {
+            translateAndAddToStore(wordToAdd);
         }
-        String translatedWord = translator.translate(wordToAdd);
-        if (! wordStore.containsKey(translatedWord))
-            wordStore.put(translatedWord, new ArrayList<String>());
-
-        wordStore.get(translatedWord).add(wordToAdd);
     }
 
     public int countWord(String countForWord) {
@@ -38,6 +33,22 @@ public class WordApp {
             return 0;
             //throw new WordNotExistException("Word " + countForWord + " not exist.");
         }
+    }
+
+    private boolean validateWord(String wordToAdd) throws NotAValidWordException {
+        if (! Validator.checkOnlyContainAlphanumeric(wordToAdd)) {
+            throw new NotAValidWordException(WORD_CAN_ONLY_CONTAIN_ALPHANUMERIC_CHARACTERS);
+        }
+        return true;
+    }
+
+    private void translateAndAddToStore(String wordToAdd) {
+        String translatedWord = translator.translate(wordToAdd);
+        if (! wordStore.containsKey(translatedWord))
+            wordStore.put(translatedWord, new ArrayList<String>());
+
+        if (wordStore.get(translatedWord).stream()
+                .noneMatch(item -> item.equals(wordToAdd))) wordStore.get(translatedWord).add(wordToAdd);
     }
 
     public static void main(String[] args) throws NotAValidWordException {

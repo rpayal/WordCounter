@@ -46,4 +46,16 @@ public class WordAppTest {
 
         assertEquals(3, wordApp.countWord("flower"));
     }
+
+    @Test
+    @DisplayName("do not allow duplicate words in word store.")
+    @Order(3)
+    public void checkWordApp_no_duplicate_scenario() throws NotAValidWordException {
+        wordApp.addWord("flower");
+        wordApp.addWord("flor");
+        wordApp.addWord("blume");
+        wordApp.addWord("flower");
+
+        assertEquals(3, wordApp.countWord("flower"));
+    }
 }
