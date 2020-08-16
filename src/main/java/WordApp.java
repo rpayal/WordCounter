@@ -47,8 +47,7 @@ public class WordApp {
         if (! wordStore.containsKey(translatedWord))
             wordStore.put(translatedWord, new ArrayList<String>());
 
-        if (wordStore.get(translatedWord).stream()
-                .noneMatch(item -> item.equals(wordToAdd))) wordStore.get(translatedWord).add(wordToAdd);
+        wordStore.get(translatedWord).add(wordToAdd);
     }
 
     public static void main(String[] args) throws NotAValidWordException {
